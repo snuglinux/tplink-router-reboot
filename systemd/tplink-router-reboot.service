@@ -1,0 +1,5 @@
+[Unit]
+Description=Reboot the router
+
+[Service]
+ExecStart=tplink-router-reboot

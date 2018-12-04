@@ -1,0 +1,26 @@
+#!/bin/sh
+
+CONF_FILE=/etc/tplink-router-reboot.conf
+if ! [ -f $CONF_FILE ]; then
+   echo "Error: $CONF_FILE configuration file not found!"
+   exit 1;
+fi
+
+source /etc/tplink-router-reboot.conf
+
+save_log() {
+  str_log=$1
+  echo "$(date +%Y.%m.%d-%H:%M:%S) - $str_log" >> "$LOG_PATCH/tplink-router-reboot.log"
+}
+
+res=1
+/bin/ping $ROUTER_IP -c 3 > /dev/null 2>&1 && res=0
+if [ ${res} -ne 0 ]; then
+   save_log "$ROUTER_IP router is not available"
+   exit 1
+fi
+
+curl --basic --user "$USERNAME:$PASSWORD" -A "Mozilla/4.73 [en] (X11; U; Linux 2.2.15 i686)" --refer "http://$ROUTER_IP" "$ROUTER_IP/userRpm/SysRebootRpm.htm?Reboot=reboot"
+
+save_log "run the command to restart the router"
+
