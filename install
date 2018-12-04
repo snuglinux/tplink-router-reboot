@@ -5,12 +5,12 @@ install -m755 tplink-router-reboot  "/usr/bin"
 if ! [ -f /etc/tplink-router-reboot.conf ]; then
    install -Dm 400 tplink-router-reboot.conf "/etc"
 fi
-if ! [ -d /etc/systemd/system/tplink-router-reboot.service.d ]; then
-   mkdir /etc/systemd/system/tplink-router-reboot.service.d
+if ! [ -d /etc/systemd/system/tplink-router-reboot.timer.d ]; then
+   mkdir /etc/systemd/system/tplink-router-reboot.timer.d
 fi
 
-if ! [ -f /etc/systemd/system/tplink-router-reboot.service.d/tplink-router-reboot.conf ]; then
-   install -Dm 400 systemd/tplink-router-reboot.service.d/tplink-router-reboot.conf  "/etc/systemd/system/tplink-router-reboot.service.d"
+if ! [ -f /etc/systemd/system/tplink-router-reboot.timer.d/tplink-router-reboot.conf ]; then
+   install -Dm 400 systemd/tplink-router-reboot.timer.d/tplink-router-reboot.conf  "/etc/systemd/system/tplink-router-reboot.timer.d"
 fi
 
 install -Dm 644 systemd/tplink-router-reboot.service "/usr/lib/systemd/system"

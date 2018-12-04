@@ -1,13 +1,13 @@
 pkgname=tplink-router-reboot
-pkgver=0.0.2
-pkgrel=2
+pkgver=0.0.3
+pkgrel=1
 pkgdesc="Simple console script to reload TP-Link routers"
 arch=('any')
 url="https://github.com/snuglinux/${pkgname}"
 license=('GPL2')
 depends=("openssl" "grep")
 source=("https://github.com/snuglinux/${pkgname}/archive/${pkgver}.tar.gz")
-md5sums=('28552e7caffec91c8adaada94f9d03ce')
+md5sums=('7fead5eec3fe8dd8b6401d9e3af24cb4')
 backup=( "etc/systemd/system/tplink-router-reboot.service.d/${pkgname}.conf" "etc/${pkgname}.conf" )
 
 package(){
@@ -17,7 +17,7 @@ package(){
   install -d "$pkgdir/usr/bin"
   install -d "$pkgdir/usr/share/doc/${pkgname}"
   install -d "$pkgdir/usr/share/licenses/${pkgname}"
-  install -d "$pkgdir/etc/systemd/system/tplink-router-reboot.service.d"
+  install -d "$pkgdir/etc/systemd/system/tplink-router-reboot.timer.d"
   install -d "$pkgdir/usr/lib/systemd/system"
   # Copy files
   install -m755 ${pkgname}         "$pkgdir/usr/bin"
@@ -27,7 +27,7 @@ package(){
   install -Dm 644 systemd/tplink-router-reboot.service "$pkgdir/usr/lib/systemd/system"
   install -Dm 644 systemd/tplink-router-reboot.timer   "$pkgdir/usr/lib/systemd/system"
   install -Dm 644 systemd/tplink-router-reboot.timer   "$pkgdir/usr/lib/systemd/system"
-  install -Dm 644 systemd/tplink-router-reboot.service.d/${pkgname}.conf "$pkgdir/etc/systemd/system/tplink-router-reboot.service.d"
+  install -Dm 644 systemd/tplink-router-reboot.timer.d/${pkgname}.conf "$pkgdir/etc/systemd/system/tplink-router-reboot.timer.d"
   #sed -e "s/CURRENT_VERSION=0.0.0/CURRENT_VERSION=${pkgver}/" -i "${pkgdir}/usr/bin/${pkgname}"
 }
 
